@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import Image from '../images/banner1.png'
 import {
   IconButton,
   Avatar,
@@ -20,24 +21,26 @@ import {
 import {
   FiHome,
   FiHeart,
-  FiTrendingUp,
-  FiCompass,
   FiStar,
-  FiSettings,
-  FiMenu,
-  FiBell,
-  FiChevronDown,
+  FiMenu
 } from 'react-icons/fi';
-import { GiBlood } from "react-icons/gi";
 import { FaUserSecret, FaRobot, FaSkullCrossbones } from "react-icons/fa";
-
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
+import Section  from './Section'
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
 }
+
+const breakpoints = {
+    sm: '320px',
+    md: '768px',
+    lg: '960px',
+    xl: '1200px',
+    '2xl': '1536px',
+  }
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome },
   { name: 'Love', icon: FiHeart },
@@ -71,6 +74,20 @@ export default function SidebarWithHeader() {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {/* {children} */}
+        <Box 
+        backgroundImage={`url(${Image})`}
+        backgroundSize="cover"
+        backgroundRepeat="no-repeat"
+        backgroundPosition= "bottom"
+        height="200px"
+        >
+        </Box>
+        <Box>
+        {LinkItems.map((link) => (
+        <Section key={link.name}/>
+      ))}
+      </Box>
+
       </Box>
     </Box>
   );
@@ -163,26 +180,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
-      <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace">
-        Bright book
-      </Text>
-
       <HStack spacing={{ base: '0', md: '6' }}>
       <Text
-        // display={{ base: 'flex', md: 'none' }}
-        fontSize="3xl"
+        fontSize={{base: "3xl", xs: "2xl"}}
         fontFamily='Roboto Mono'
         fontWeight="bold">
         A tiny reading blog 
       </Text>
-
-        <Flex alignItems={'center'}>
-
-        </Flex>
       </HStack>
     </Flex>
   );
