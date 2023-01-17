@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-// import Head from 'next/head';
 import {
     Box,
     Heading,
@@ -8,10 +7,22 @@ import {
     Divider,
     Stack,
 } from '@chakra-ui/react'
-
+import { ChangeEventHandler } from 'react'
 import Post from './Post'
 
-export default function Section() {
+type Props = {
+    name: string
+}
+
+const  Section : React.FC<Props> = ({name})=> {
+
+    const [isChecked, setChecked] = React.useState(true)
+
+    const handleChange :ChangeEventHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        setChecked(!isChecked)
+    }
+
     return (
         <>
             <Box
@@ -30,10 +41,11 @@ export default function Section() {
                     marginBottom="30px"
                     marginTop="30px"
                 >
-                    <Heading>I'm a Heading</Heading>
-                    <Switch colorScheme="teal" size="lg" />
+                    <Heading>{name}</Heading>
+                    <Switch colorScheme="teal" size="lg" defaultChecked isChecked={isChecked} onChange={handleChange}/>
                 </Stack>
-                <SimpleGrid columns={4} spacingX="40px" spacingY="20px">
+                <SimpleGrid columns={4} spacingX="40px" spacingY="20px"  
+                            display={isChecked? "flex" : "none"} >
                     <Post />
                     <Post />
                     <Post />
@@ -43,3 +55,5 @@ export default function Section() {
         </>
     )
 }
+
+export default  Section;

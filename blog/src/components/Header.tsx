@@ -45,7 +45,7 @@ const LinkItems: Array<LinkItemProps> = [
     { name: 'Mystery', icon: FaUserSecret },
 ]
 
-export default function SidebarWithHeader() {
+const  Header= () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -78,9 +78,11 @@ export default function SidebarWithHeader() {
                     height="200px"
                 ></Box>
                 <Box>
-                    {LinkItems.map((link) => (
-                        <Section key={link.name} />
-                    ))}
+                    {LinkItems.map((link) => {
+                        if(link.name !== "Home"){
+                            return (
+                        <Section key={link.name} name={link.name} />
+                    )}})}
                 </Box>
             </Box>
         </Box>
@@ -118,6 +120,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 />
             </Flex>
             {LinkItems.map((link) => (
+                
                 <NavItem key={link.name} icon={link.icon}>
                     {link.name}
                 </NavItem>
@@ -202,3 +205,5 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         </Flex>
     )
 }
+
+export default Header;
