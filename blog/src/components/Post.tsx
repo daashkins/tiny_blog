@@ -6,21 +6,22 @@ import {
     CardFooter,
     Flex,
     Badge,
-    Avatar,
-    Button,
     Text,
-    IconButton,
     Box,
     Heading,
     Image,
     Tag,
 } from '@chakra-ui/react'
-import { BiLike, BiChat, BiShare } from 'react-icons/bi'
-import { BsThreeDotsVertical } from 'react-icons/bs'
+import { PostsContextType, IPost } from '../types'
 
-const Post = () => {
+type Props = {
+    key: string
+    post: IPost
+}
+
+const Post = ({post}) => {
     return (
-        <Card maxW="md">
+        <Card maxW="md" key={Math.random()}>
             <CardHeader>
                 <Flex>
                     <Flex
@@ -30,14 +31,14 @@ const Post = () => {
                         justifyContent="space-between"
                         flexWrap="wrap"
                     >
-                        <Heading size="md">Segun Adebayo</Heading>
+                        <Heading size="md">{post.title}</Heading>
                         <Box>
                             <Badge
                                 borderRadius="full"
                                 px="2"
                                 colorScheme="teal"
                             >
-                                Score: 3
+                                Score: {post.reactions}
                             </Badge>
                         </Box>
                     </Flex>
@@ -45,9 +46,7 @@ const Post = () => {
             </CardHeader>
             <CardBody>
                 <Text>
-                    With Chakra UI, I wanted to sync the speed of development
-                    with the speed of design. I wanted the developer to be just
-                    as excited as the designer to create a screen.
+                    {post.body}
                 </Text>
             </CardBody>
             <Image
@@ -66,26 +65,17 @@ const Post = () => {
                     },
                 }}
             >
-                <Tag size="sm" key="sm" variant="solid" colorScheme="teal">
-                    Teal
-                </Tag>
-                <Tag size="sm" key="sm" variant="solid" colorScheme="teal">
-                    Teal
-                </Tag>
-
-                <Tag size="sm" key="sm" variant="solid" colorScheme="teal">
+                {post.tags.map((tag) =><Tag size="sm" key="sm1" variant="solid" colorScheme="teal">
+                    {tag}
+                </Tag> )}
+                
+                {/* <Tag size="sm" key="sm2" variant="solid" colorScheme="teal">
                     Teal
                 </Tag>
 
-                {/* <Button flex="1" variant="ghost" leftIcon={<BiLike />}>
-                    Like
-                </Button>
-                <Button flex="1" variant="ghost" leftIcon={<BiChat />}>
-                    Comment
-                </Button>
-                <Button flex="1" variant="ghost" leftIcon={<BiShare />}>
-                    Share
-                </Button> */}
+                <Tag size="sm" key="sm3" variant="solid" colorScheme="teal">
+                    Teal
+                </Tag> */}
             </CardFooter>
         </Card>
     )

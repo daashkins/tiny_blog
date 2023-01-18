@@ -9,22 +9,26 @@ import {
 } from '@chakra-ui/react'
 import { ChangeEventHandler } from 'react'
 import Post from './Post'
+import { useContext } from 'react'
+import { PostsContext } from '../context/postsContext'
+import { PostsContextType, IPost } from '../types'
 
 type Props = {
     name: string
+    key: string
 }
 
-const  Section : React.FC<Props> = ({name})=> {
-
+const Section: React.FC<Props> = ({ name }) => {
     const [isChecked, setChecked] = React.useState(true)
-
-    const handleChange :ChangeEventHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { posts } = useContext(PostsContext) as PostsContextType
+    const handleChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         event.preventDefault()
         setChecked(!isChecked)
     }
 
     return (
-        <>
             <Box
                 background="#e3e3ec"
                 marginTop="30px"
@@ -42,18 +46,30 @@ const  Section : React.FC<Props> = ({name})=> {
                     marginTop="30px"
                 >
                     <Heading>{name}</Heading>
-                    <Switch colorScheme="teal" size="lg" defaultChecked isChecked={isChecked} onChange={handleChange}/>
+                    <Switch
+                        colorScheme="teal"
+                        size="lg"
+                        defaultChecked
+                        isChecked={isChecked}
+                        onChange={handleChange}
+                    />
                 </Stack>
-                <SimpleGrid columns={4} spacingX="40px" spacingY="20px"  
-                            display={isChecked? "flex" : "none"} >
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
+                <SimpleGrid
+                    columns={4}
+                    spacingX="40px"
+                    spacingY="20px"
+                    display={isChecked ? 'flex' : 'none'}
+                >
+                {posts.map((post, index) => {
+                    console.log(name)
+
+                    if(post.tags.includes(name.toLocaleLowerCase())){
+                        return <Post post={post} key={`${name}post${index}`} />
+                    }
+})}
                 </SimpleGrid>
             </Box>
-        </>
     )
 }
 
-export default  Section;
+export default Section
