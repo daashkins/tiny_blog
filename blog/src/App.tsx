@@ -17,13 +17,11 @@ import { Logo } from './Logo'
 export const App = () => (
     <ChakraProvider theme={theme}>
         {/* <> */}
-            <Routes>
-                <Route path="/" element={<Header />} />
-            </Routes>
+        <Routes>
+            <Route path="/" element={<Header />} />
+        </Routes>
 
-            <div className="App">
-                {/* <Header /> */}
-            </div>
+        <div className="App">{/* <Header /> */}</div>
         {/* </> */}
     </ChakraProvider>
 )

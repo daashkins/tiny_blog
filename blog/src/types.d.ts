@@ -5,6 +5,7 @@ export interface IPost {
     userId: number
     tags: string[]
     reactions: number
+    image: string
 }
 export type PostsContextType = {
     posts: IPost[]

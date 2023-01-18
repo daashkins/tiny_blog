@@ -11,49 +11,61 @@ import {
     Heading,
     Image,
     Tag,
+    useFocusEffect,
 } from '@chakra-ui/react'
 import { PostsContextType, IPost } from '../types'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 type Props = {
-    key: string
+    // key: string
     post: IPost
 }
 
-const Post = ({post}) => {
+const Post = ({ post }) => {
+    const [image, setImage] = React.useState<string>(
+        'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+    )
+
+    useEffect(() => {
+        axios
+            .get(
+                `https://api.unsplash.com/search/photos?query=${post.tags[0]}&page=1&client_id=${process.env.REACT_APP_UNSPLASH}`
+            )
+            .then((response) => {
+                setImage(
+                    response.data.results[Math.floor(Math.random() * 5)].urls
+                        .small
+                )
+            })
+    })
+
     return (
-        <Card maxW="md" key={Math.random()}>
-            <CardHeader>
-                <Flex>
-                    <Flex
-                        flex="1"
-                        gap="4"
-                        alignItems="center"
-                        justifyContent="space-between"
-                        flexWrap="wrap"
-                    >
-                        <Heading size="md">{post.title}</Heading>
-                        <Box>
-                            <Badge
-                                borderRadius="full"
-                                px="2"
-                                colorScheme="teal"
-                            >
-                                Score: {post.reactions}
-                            </Badge>
-                        </Box>
-                    </Flex>
-                </Flex>
+        <Card maxW="xs" key={Math.random()} position="relative" height="550px">
+            <CardHeader position="relative">
+                <Heading size="md" height="50px" marginTop="5">
+                    {post.title}
+                </Heading>
+                <Badge
+                    borderRadius="full"
+                    px="2"
+                    colorScheme="teal"
+                    position="absolute"
+                    right="2"
+                    top="2"
+                >
+                    Score: {post.reactions}
+                </Badge>
             </CardHeader>
-            <CardBody>
-                <Text>
-                    {post.body}
-                </Text>
+            <CardBody
+                height="200px"
+                marginBottom="30px"
+                overflow="auto"
+                boxSizing="border-box"
+            >
+                <Text fontSize="14px">{post.body}</Text>
             </CardBody>
-            <Image
-                objectFit="cover"
-                src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                alt="Chakra UI"
-            />
+            <Image height="200" objectFit="cover" src={image} alt="Chakra UI" />
 
             <CardFooter
                 // justify="space-between"
@@ -65,17 +77,16 @@ const Post = ({post}) => {
                     },
                 }}
             >
-                {post.tags.map((tag) =><Tag size="sm" key="sm1" variant="solid" colorScheme="teal">
-                    {tag}
-                </Tag> )}
-                
-                {/* <Tag size="sm" key="sm2" variant="solid" colorScheme="teal">
-                    Teal
-                </Tag>
-
-                <Tag size="sm" key="sm3" variant="solid" colorScheme="teal">
-                    Teal
-                </Tag> */}
+                {post.tags.map((tag) => (
+                    <Tag
+                        size="sm"
+                        key={`${Math.random()}`}
+                        variant="solid"
+                        colorScheme="teal"
+                    >
+                        {tag}
+                    </Tag>
+                ))}
             </CardFooter>
         </Card>
     )
