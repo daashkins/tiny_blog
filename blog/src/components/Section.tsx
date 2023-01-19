@@ -9,7 +9,6 @@ import {
     useBreakpointValue,
     Stack,
 } from '@chakra-ui/react'
-import { ChangeEventHandler } from 'react'
 import Post from './Post'
 import { useContext } from 'react'
 import { PostsContext } from '../context/postsContext'
@@ -22,7 +21,6 @@ import 'slick-carousel/slick/slick-theme.css'
 
 type Props = {
     name: string
-    // key: string
 }
 
 const sliderSettings = {
@@ -52,10 +50,8 @@ const Section: React.FC<Props> = ({ name }) => {
             borderRadius="15px"
             position="relative"
         >
-            {/* <Divider height="3px" /> */}
             <Stack
                 direction="row"
-                // justifyContent="space-between"
                 alignItems="center"
                 gap="20px"
                 marginBottom="30px"
@@ -70,10 +66,8 @@ const Section: React.FC<Props> = ({ name }) => {
                     onChange={handleChange}
                 />
             </Stack>
-    
-               
 
-                        <SimpleGrid
+            <SimpleGrid
                 columns={4}
                 flexWrap="wrap"
                 spacingX="40px"

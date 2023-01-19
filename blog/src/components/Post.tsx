@@ -13,12 +13,11 @@ import {
     Tag,
     useFocusEffect,
 } from '@chakra-ui/react'
-import { PostsContextType, IPost } from '../types'
+import { IPost } from '../types'
 import { useEffect } from 'react'
 import axios from 'axios'
 
 type Props = {
-    // key: string
     post: IPost
 }
 
@@ -68,7 +67,6 @@ const Post = ({ post }) => {
             <Image height="200" objectFit="cover" src={image} alt="Chakra UI" />
 
             <CardFooter
-                // justify="space-between"
                 gap="20px"
                 flexWrap="wrap"
                 sx={{

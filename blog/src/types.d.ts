@@ -7,6 +7,9 @@ export interface IPost {
     reactions: number
     image: string
 }
+
 export type PostsContextType = {
     posts: IPost[]
+    section: string
+    setShowSection: (name: string) => void
 }
