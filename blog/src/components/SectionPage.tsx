@@ -23,10 +23,11 @@ import { FiHome, FiHeart, FiStar, FiMenu } from 'react-icons/fi'
 import { FaUserSecret, FaRobot, FaSkullCrossbones } from 'react-icons/fa'
 import { IconType } from 'react-icons'
 import { useContext, ReactText, ChangeEvent, ChangeEventHandler } from 'react'
+import { useParams } from 'react-router-dom'
 import Section from './Section'
 import { PostsContext } from '../context/postsContext'
 import { PostsContextType } from '../types'
-import Landing from './Landing'
+import SectionMain from './SectionMain'
 
 interface LinkItemProps {
     name: string
@@ -51,15 +52,6 @@ const LinkItems: Array<LinkItemProps> = [
 
 const Header = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const { section, setShowSection } = useContext(
-        PostsContext
-    ) as PostsContextType
-
-    const handleSelectChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-        setShowSection(event.target.value)
-    }
 
     return (
         <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -81,7 +73,7 @@ const Header = () => {
                 </DrawerContent>
             </Drawer>
             <MobileNav onOpen={onOpen} />
-            <Landing />
+            <SectionMain />
         </Box>
     )
 }
@@ -117,7 +109,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 />
             </Flex>
             {LinkItems.map((link) => (
-                <NavItem key={link.name} icon={link.icon}>
+                <NavItem key={link.name} icon={link.icon} name={link.name}>
                     {link.name}
                 </NavItem>
             ))}
@@ -127,12 +119,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
     icon: IconType
+    name: string
     children: ReactText
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, name, children, ...rest }: NavItemProps) => {
     return (
         <Link
-            href="#"
+            href={`/${name}`}
             style={{ textDecoration: 'none' }}
             _focus={{ boxShadow: 'none' }}
         >
