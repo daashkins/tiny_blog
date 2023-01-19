@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Header from './components/Header'
+import Home from './components/Home'
 import {
     ChakraProvider,
     Box,
@@ -16,12 +16,10 @@ import { Logo } from './Logo'
 
 export const App = () => (
     <ChakraProvider theme={theme}>
-        {/* <> */}
         <Routes>
-            <Route path="/" element={<Header />} />
+            <Route path="/" element={<Home />} />
         </Routes>
 
-        <div className="App">{/* <Header /> */}</div>
-        {/* </> */}
+        <div className="App"></div>
     </ChakraProvider>
 )

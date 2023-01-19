@@ -2,14 +2,13 @@ import React, { ReactNode } from 'react'
 import Image from '../images/banner1.png'
 import {
     IconButton,
-    Avatar,
-    Box,
     CloseButton,
-    Button,
+    Box,
     Flex,
+    Button,
     HStack,
-    VStack,
     Icon,
+    VStack,
     useColorModeValue,
     Link,
     Drawer,
@@ -27,6 +26,7 @@ import { useContext, ReactText, ChangeEvent, ChangeEventHandler } from 'react'
 import Section from './Section'
 import { PostsContext } from '../context/postsContext'
 import { PostsContextType } from '../types'
+import Landing from './Landing'
 
 interface LinkItemProps {
     name: string
@@ -81,39 +81,7 @@ const Header = () => {
                 </DrawerContent>
             </Drawer>
             <MobileNav onOpen={onOpen} />
-            <Box ml={{ base: 0, md: 60 }} p="4">
-                <Box
-                    backgroundImage={`url(${Image})`}
-                    backgroundSize="cover"
-                    backgroundRepeat="no-repeat"
-                    backgroundPosition="bottom"
-                    height="200px"
-                ></Box>
-                <Select
-                    placeholder="Filter"
-                    width="300px"
-                    margin="30px auto"
-                    onChange={handleSelectChange}
-                >
-                    <option value="all">All</option>
-                    <option value="love">Love</option>
-                    <option value="fiction">Fiction</option>
-                    <option value="classic">Classic</option>
-                    <option value="mystery">Mystery</option>
-                    <option value="crime">Crime</option>
-                </Select>
-                <Box>
-                    {LinkItems.map((link) => {
-                        if (section === 'all' && link.name !== 'Home') {
-                            return <Section key={link.name} name={link.name} />
-                        }
-                        if (section === link.name.toLowerCase()) {
-                            return <Section key={link.name} name={link.name} />
-                        }
-                        return
-                    })}
-                </Box>
-            </Box>
+            <Landing />
         </Box>
     )
 }
