@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useEffect, useState, createContext } from 'react'
 import axios from 'axios'
 import { PostsContextType, IPost } from '../types'
-import { data } from '../db.mock/db'
 
 export const PostsContext = createContext<PostsContextType | null>(null)
 

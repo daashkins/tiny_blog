@@ -1,25 +1,8 @@
 import * as React from 'react'
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Flex,
-    Badge,
-    Text,
-    Box,
-    Heading,
-    Image,
-    Tag,
-    useFocusEffect,
-} from '@chakra-ui/react'
-import { IPost } from '../types'
+import { Card, CardHeader, CardBody, CardFooter, Badge, Text, Heading, Image, Tag } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import axios from 'axios'
 
-type Props = {
-    post: IPost
-}
 
 const Post = ({ post }) => {
     const [image, setImage] = React.useState<string>(
