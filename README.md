@@ -11,3 +11,4 @@ This App created with the following technologies:
 External API that was used: 
 - Photos - https://unsplash.com/api
 
+![React App](https://user-images.githubusercontent.com/64709477/214008762-7e95f8ea-582f-4a83-bd33-8a16aacc596a.png)
